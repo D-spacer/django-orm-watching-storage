@@ -1,5 +1,7 @@
 import os
 from environs import Env
+from django.core.management.utils import get_random_secret_key  
+
 
 env = Env()
 env.read_env()
@@ -17,7 +19,8 @@ DATABASES = {
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = get_random_secret_key()
+
 
 DEBUG = env.bool('DEBUG')
 
