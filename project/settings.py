@@ -1,6 +1,5 @@
 import os
 from environs import Env
-from django.core.management.utils import get_random_secret_key  
 
 
 env = Env()
@@ -19,14 +18,14 @@ DATABASES = {
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = get_random_secret_key()
+SECRET_KEY = env.str('SECRET_KEY', default='SOME_DEFAULT_KEY')
 
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
 ROOT_URLCONF = 'project.urls'
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[host1, host2])
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
